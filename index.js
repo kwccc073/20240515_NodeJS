@@ -1,5 +1,7 @@
+// 引入套件
 import 'dotenv/config'
 import linebot from 'linebot'
+//
 import commandFE from './commands/fe.js'
 import commandTWGod from './commands/twgod.js'
 import commandUsd from './commands/usd.js'
@@ -13,25 +15,28 @@ scheduleJob('0 5 * * *', () => {
 })
 // 使啟動機器人的時候也會進行這個function
 usdtwd.update()
-
+// 設定機器人
 const bot = linebot({
   channelId: process.env.CHANNEL_ID,
   channelSecret: process.env.CHANNEL_SECRET,
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN
 })
 
+// 當收到訊息時，event 包含了訊息的類型、文字等
 bot.on('message', event => {
 // process.env.DEBUG的true為文字，要用''框起來
   if (process.env.DEBUG === 'true') {
     console.log(event)
   }
   if (event.message.type === 'text') {
+    // event.message.text為使用者傳送的文字
     if (event.message.text === '前端') {
       commandFE(event)
     } else if (event.message.text === 'usd') {
       commandUsd(event)
     } else if (event.message.text === 'qr') {
-      // quick reply
+      // 這裡是quick reply
+      // event.reply 為機器人回覆的訊息
       event.reply({
         type: 'text',
         text: '123',
@@ -78,7 +83,7 @@ bot.on('postback', event => {
   console.log(event)
   event.reply('aaa')
 })
-
+// 設定機器人監聽 port
 bot.listen('/', process.env.PORT || 3000, () => {
   console.log('機器人啟動')
 })

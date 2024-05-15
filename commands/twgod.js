@@ -1,9 +1,10 @@
+// 引入套件
 import axios from 'axios'
 import { distance } from '../utils/distance.js'
 import template from '../templates/taiwangods.js'
-import fs from 'node:fs'
 // node: 表示node js內建的套件
 // fs表示檔案處理，可以讀也可以寫
+import fs from 'node:fs'
 
 export default async event => {
   try {
@@ -34,7 +35,7 @@ export default async event => {
         t.body.contents[0].text = d.LL_Title
         t.body.contents[1].text = d.LL_Highlights
         t.body.contents[2].contents[0].contents[1].text = d.LL_Country + d.LL_Area + d.LL_Address
-        t.body.contents[2].contents[1].contents[1].text = ''
+        t.body.contents[2].contents[1].contents[1].text = d.LL_OpeningData
         t.body.contents[2].contents[2].contents[1].text = d.LL_OpeningTime
         // 地圖網址（d.L_MapY、d.L_MapX為經緯度）
         t.footer.contents[0].action.uri = `https://www.google.com/maps/search/?api=1&query=${d.L_MapY},${d.L_MapX}`
