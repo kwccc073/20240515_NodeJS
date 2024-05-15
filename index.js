@@ -30,7 +30,7 @@ bot.on('message', event => {
       commandFE(event)
     } else if (event.message.text === 'usd') {
       commandUsd(event)
-    }else if(event.message.text === 'qr') {
+    } else if (event.message.text === 'qr') {
       // quick reply
       event.reply({
         type: 'text',
@@ -46,7 +46,7 @@ bot.on('message', event => {
                 // 按鈕文字
                 label: 'taipei'
               }
-            },            
+            },
             {
               type: 'action',
               action: {
@@ -62,7 +62,7 @@ bot.on('message', event => {
                 type: 'postback',
                 uri: 'https://wdaweb.github.io',
                 label: '職訓',
-                data:'aaa'
+                data: 'aaa'
               }
             }
           ]
