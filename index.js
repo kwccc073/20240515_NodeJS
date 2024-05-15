@@ -31,8 +31,10 @@ bot.on('message', event => {
   if (event.message.type === 'text') {
     // event.message.text為使用者傳送的文字
     if (event.message.text === '前端') {
+      // commandFE()待確認
       commandFE(event)
     } else if (event.message.text === 'usd') {
+      // commandUsd()待確認
       commandUsd(event)
     } else if (event.message.text === 'qr') {
       // 這裡是quick reply
@@ -75,6 +77,7 @@ bot.on('message', event => {
       })
     }
   } else if (event.message.type === 'location') {
+    // commandTWGod待確認
     commandTWGod(event)
   }
 })
