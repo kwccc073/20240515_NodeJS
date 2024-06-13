@@ -1,5 +1,6 @@
 // 引入套件
 import axios from 'axios'
+// 引入計算經緯度的檔案
 import { distance } from '../utils/distance.js'
 import template from '../templates/taiwangods.js'
 // node: 表示node js內建的套件

@@ -1,7 +1,7 @@
 // 引入套件
 import 'dotenv/config'
 import linebot from 'linebot'
-//
+// 引入commands裡的檔案，
 import commandFE from './commands/fe.js'
 import commandTWGod from './commands/twgod.js'
 import commandUsd from './commands/usd.js'
@@ -22,7 +22,8 @@ const bot = linebot({
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN
 })
 
-// 當收到訊息時，event 包含了訊息的類型、文字等
+// 當機器人收到訊息時，執行{}內的程式碼
+// event 包含了訊息的類型、文字等（待編輯）
 bot.on('message', event => {
 // process.env.DEBUG的true為文字，要用''框起來
   if (process.env.DEBUG === 'true') {
@@ -34,7 +35,7 @@ bot.on('message', event => {
       // commandFE()待確認
       commandFE(event)
     } else if (event.message.text === 'usd') {
-      // commandUsd()待確認
+      // 執行command>usd.js裡的函數
       commandUsd(event)
     } else if (event.message.text === 'qr') {
       // 這裡是quick reply
