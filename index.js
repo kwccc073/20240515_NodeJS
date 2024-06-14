@@ -8,6 +8,9 @@ import commandUsd from './commands/usd.js'
 import { scheduleJob } from 'node-schedule'
 import * as usdtwd from './data/usdtwd.js'
 
+// 測試
+import commandTest from './commands/test.js'
+
 // https://crontab.guru/#0_5_*_*_*
 // 設定排程，每天早上五點就會執行這個function來更新匯率，可以節省找資料的時間
 scheduleJob('0 5 * * *', () => {
@@ -75,12 +78,12 @@ bot.on('message', event => {
         }
       })
     } else if (event.message.text === 'homework') {
-      // event.reply({
-      //   type: 'text',
-      //   text: '測試文字'
-      // })
-      commandFE(event)
-      commandUsd(event)
+      event.reply({
+        type: 'text',
+        text: '測試測試測試'
+      })
+      // commandTest(event)
+      // commandUsd(event)
     }
   } else if (event.message.type === 'location') {
     // commandTWGod待確認
