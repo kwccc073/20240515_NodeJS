@@ -75,10 +75,12 @@ bot.on('message', event => {
         }
       })
     } else if (event.message.text === 'homework') {
-      event.reply({
-        type: 'text',
-        text: '測試文字'
-      })
+      // event.reply({
+      //   type: 'text',
+      //   text: '測試文字'
+      // })
+      commandFE(event)
+      commandUsd(event)
     }
   } else if (event.message.type === 'location') {
     // commandTWGod待確認
