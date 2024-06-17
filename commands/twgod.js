@@ -26,7 +26,7 @@ export default async (event) => {
     )
     const replies = data
       .map((d) => {
-        // 對陣列每個東西(d)裡面加上distance欄位，distance為一個陣列，其內容如下方括弧
+        // 對陣列每個東西(d)裡面加上distance欄位，distance為函式，其使用的值如下方括弧
         d.distance = distance(
           // 景點的經緯度
           d.L_MapY,
