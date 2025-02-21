@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-// 導出變數exrate，並賦予初始值32
+// 導出變數exrate(匯率)，並賦予初始值32
 export let exrate = 32
 
 export const update = async () => {

@@ -1,11 +1,13 @@
 // 1. 引入套件
-import 'dotenv/config' // 用於讀取環境設定檔(.env)
-import linebot from 'linebot' // 引用機器人
+import 'dotenv/config' // 用於讀取環境設定檔(.env)，將.env裡的變數放入process.env裡面
+import linebot from 'linebot' // 引用機器人套件
 // 5.引入commands裡設定的指令
 import commandFE from './commands/fe.js'
 import commandTWGod from './commands/twgod.js'
 import commandUsd from './commands/usd.js'
-import { scheduleJob } from 'node-schedule'
+// 引入套件
+import { scheduleJob } from 'node-schedule' // 用於排程
+
 import * as usdtwd from './data/usdtwd.js'
 
 // https://crontab.guru/#0_5_*_*_*
@@ -23,44 +25,42 @@ const bot = linebot({
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN
 })
 
-// 4. 當機器人收到訊息(message)時要執行的程式碼
-// event表示訊息事件的資訊， 包含了訊息的類型、文字等
+// 4. 當機器人收到訊息(message)時要執行的程式碼-----------------------------------------------------------------------------
+// event => 表示該訊息事件的資訊， 包含了訊息的類型、文字等
 bot.on('message', (event) => {
-  // process.env.DEBUG的true為文字，要用''框起來
-  // DEBUG用於判斷本機開發還是雲端伺服器，上傳雲端的時候可以將.env裡的DEBUG設定為false，這樣就不會有任何作用
+  // .env的變數都被解析成文字，因此process.env.DEBUG的true為文字，要用''框起來
+  // DEBUG用於判斷本機開發還是雲端伺服器，上傳雲端的時候可以將.env裡的DEBUG設定為false，這樣就不會執行下面程式碼
+  // 本機開發才執行console.log(event)
   if (process.env.DEBUG === 'true') {
     console.log(event)
   }
   if (event.message.type === 'text') {
     // event.message.text為使用者傳送的文字
     if (event.message.text === '前端') {
-      // commandFE()待確認
       commandFE(event)
     } else if (event.message.text === 'usd') {
-      // commandUsd()待確認
       commandUsd(event)
+      // quick reply-------------------------------------
     } else if (event.message.text === 'qr') {
-      // 這裡是quick reply
       // event.reply 為機器人回覆的訊息
       event.reply({
         type: 'text',
         text: '123',
         quickReply: {
+          // items表示quick replies有哪些按鈕
           items: [
             {
               type: 'action',
               action: {
-                type: 'message',
-                // 按下去使用者會傳送出的文字
-                text: 'ubike:taipei',
-                // 按鈕文字
-                label: 'taipei'
+                type: 'message', // 表示按下去後使用者會傳送訊息
+                text: 'ubike:taipei', // 表示按下去後使用者會傳送的訊息內容
+                label: 'taipei' // 按鈕的文字
               }
             },
             {
               type: 'action',
               action: {
-                type: 'uri',
+                type: 'uri', // 按下去後使用者會打開網頁
                 uri: 'https://wdaweb.github.io',
                 label: '職訓'
               }
@@ -68,11 +68,10 @@ bot.on('message', (event) => {
             {
               type: 'action',
               action: {
-                // 使使用者傳送的訊息不會出現在聊天室
-                type: 'postback',
+                type: 'postback', // 按下去後使用者傳送的訊息不會出現在聊天室，需另外寫bot.on('postback', .....)
                 uri: 'https://wdaweb.github.io',
                 label: '職訓',
-                data: 'aaa'
+                data: 'aaa' // 使用者要傳送到伺服器的東西
               }
             }
           ]
@@ -90,7 +89,7 @@ bot.on('postback', (event) => {
   event.reply('aaa')
 })
 
-// 3. 設定機器人的網頁伺服器，去監聽指的 port跟指定的路徑的請求
+// 3. 設定機器人的網頁伺服器，去監聽指定的port跟指定的路徑的請求
 // process.env.PORT || 3000 表示：若環境變數裡有PORT就用它，沒有就用3000
 bot.listen('/', process.env.PORT || 3000, () => {
   console.log('機器人啟動')

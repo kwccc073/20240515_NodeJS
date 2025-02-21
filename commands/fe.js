@@ -1,3 +1,7 @@
+/* 此檔案為使用者傳送文字為"前端"的訊息要做的處理------------------------------------
+   對網頁https://wdaweb.github.io/ 發請求，抓需要的資訊*/ 
+
+// 引入套件 
 import axios from 'axios'// 用於發請求
 import * as cheerio from 'cheerio' // 引入cheerio的固定寫法
 // 套件cheerio之功能是在Node.js環境下，使用JQ的語法去解析HTML的文字

@@ -1,3 +1,5 @@
+// 此檔案為LINE訊息模板
+// 用funtion方式是因應傳值傳址的問題，總之是要讓每次呼叫都不會改到原本的值
 export default () => {
   return {
     type: "bubble",
